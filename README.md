@@ -1,3 +1,32 @@
+# Running Locally
+Running locally can be done via `make`. or you can also run directly via editors.
+Set active profile as `local` for simple plain text logs.
+
+### Gradle
+It's always good idea to ensure you can build the project with gradle
+```shell
+gradle clean build
+```
+
+### Makefile
+Using `make` is the most direct way to run the project
+```shell
+# to start complete app with mock server
+make local-start
+
+# to stop dependencies and app
+make local-stop
+
+# to start only mock server
+make local-dependencies-start
+
+# to stop mock server
+make local-dependencies-stop
+
+# to build docker image
+make build-image
+```
+
 # Coding Challenge
 
 ### In this assessment you will be tasked with filling out the functionality of different methods that will be listed further down.
