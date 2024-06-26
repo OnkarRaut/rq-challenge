@@ -1,0 +1,129 @@
+openapi: 3.0.0
+info:
+  title: Employees API
+  description: Employees API
+  version: 0.0.1
+
+paths:
+  /api/v1/employees:
+    get:
+      summary: Get all employees
+      operationId: getAllEmployees
+      tags:
+        - employees
+      responses:
+        '200':
+          description: List of employees
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/employees_details_response"
+
+  /api/v1/employee/{id}:
+    get:
+      summary: Get employee by id
+      operationId: getEmployeeById
+      parameters:
+        - $ref: "#/components/parameters/id"
+      tags:
+        - employees
+      responses:
+        '200':
+          description: Employee details
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/employee_details_response"
+
+  /api/v1/create:
+    post:
+      summary: Create employee
+      operationId: createEmployee
+      tags:
+        - employees
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/employee_details"
+      responses:
+        '200':
+          description: Created employee details
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/employee_details"
+
+
+
+  /api/v1/delete/{id}:
+    delete:
+      summary: Delete employee by id
+      operationId: deleteEmployeeById
+      tags:
+        - employees
+      parameters:
+        - $ref: "#/components/parameters/id"
+      responses:
+        '200':
+          description: Delete employee response
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/delete_employee_response"
+
+components:
+  parameters:
+    id:
+      in: path
+      name: id
+      schema:
+        type: integer
+        format: int64
+      required: true
+      description: Id
+
+  schemas:
+
+    employee_details_response:
+      type: object
+      properties:
+        status:
+          type: string
+        data:
+          $ref: "#/components/schemas/employee_details"
+
+    employees_details_response:
+      type: object
+      properties:
+        status:
+          type: string
+        data:
+          type: array
+          items:
+            $ref: "#/components/schemas/employee_details"
+
+    delete_employee_response:
+      type: object
+      properties:
+        status:
+          type: string
+        message:
+          type: string
+
+    employee_details:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        employee_name:
+          type: string
+        employee_salary:
+          type: integer
+          format: int64
+        employee_age:
+          type: integer
+        profile_image:
+          type: string
