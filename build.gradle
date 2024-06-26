@@ -1,6 +1,10 @@
+import com.github.sherter.googlejavaformatgradleplugin.VerifyGoogleJavaFormat
+
 plugins {
     id 'org.springframework.boot' version '2.6.1'
     id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+    id "org.openapi.generator" version "7.1.0"
+    id 'com.github.sherter.google-java-format' version '0.9'
     id 'java'
 }
 
@@ -8,7 +12,18 @@ group = 'com.example'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '11'
 
+configurations {
+    all {
+        exclude group: 'org.springframework.boot', module: 'spring-boot-starter-logging'
+    }
+}
+
 sourceSets.main.java.srcDirs = ['build/generated/src/main/java','src/main/java']
+
+task verifyFormatting(type: VerifyGoogleJavaFormat) {
+    exclude 'build/generated'
+    ignoreFailures true
+}
 
 repositories {
     mavenCentral()
@@ -20,9 +35,21 @@ dependencies {
     implementation 'io.swagger.core.v3:swagger-annotations:2.2.22'
     implementation 'javax.annotation:javax.annotation-api:1.3.2'
     implementation 'com.github.spotbugs:spotbugs-annotations:4.8.6'
+    implementation 'com.google.guava:guava:33.2.1-jre'
+    implementation 'org.springframework.retry:spring-retry:1.3.4'
+    implementation 'org.apache.commons:commons-lang3:3.14.0'
 
     implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-aop'
+    implementation 'org.springframework.boot:spring-boot-starter-actuator'
+    implementation 'org.springframework.boot:spring-boot-starter-log4j2'
+    implementation 'org.apache.logging.log4j:log4j-layout-template-json'
     implementation 'javax.inject:javax.inject:1'
+    compileOnly 'org.projectlombok:lombok:1.18.32'
+    annotationProcessor 'org.projectlombok:lombok:1.18.32'
+
+    testCompileOnly 'org.projectlombok:lombok:1.18.32'
+    testAnnotationProcessor 'org.projectlombok:lombok:1.18.32'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
 
