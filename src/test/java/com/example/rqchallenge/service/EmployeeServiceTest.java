@@ -56,8 +56,12 @@ public class EmployeeServiceTest {
 
   @Test
   void testCreateEmployee() {
-    EmployeeDetails returnedDetails = getRandomEmployeeDetail();
-    when(employeesApi.createEmployee(any(EmployeeDetails.class))).thenReturn(returnedDetails);
+    EmployeeDetailsResponse employeeDetailsResponse = new EmployeeDetailsResponse();
+    EmployeeDetails returnedDetails = EmployeeServiceTest.getRandomEmployeeDetail();
+    employeeDetailsResponse.setData(returnedDetails);
+
+    when(employeesApi.createEmployee(any(EmployeeDetails.class)))
+        .thenReturn(employeeDetailsResponse);
 
     Employee employee = new Employee();
     employee.setEmployeeName(UUID.randomUUID().toString());

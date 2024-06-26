@@ -114,7 +114,7 @@ paths:
         '200':
           description: Highest salary
           content:
-            text/plain:
+            application/json:
               schema:
                 type: integer
                 format: int64

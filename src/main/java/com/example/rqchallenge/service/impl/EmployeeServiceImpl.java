@@ -102,17 +102,17 @@ public class EmployeeServiceImpl implements EmployeeService {
     log.debug("Validation create employee request.");
     if (StringUtils.isBlank(employee.getEmployeeName())) {
       log.error("Missing required param name.");
-      throw new RqException(ErrorCodes.PARAM_IS_MISSING, "name");
+      throw new RqException(ErrorCodes.PARAM_IS_MISSING, "employee_name");
     }
 
     if (isNull(employee.getEmployeeAge())) {
       log.error("Missing required param age.");
-      throw new RqException(ErrorCodes.PARAM_IS_MISSING, "age");
+      throw new RqException(ErrorCodes.PARAM_IS_MISSING, "employee_age");
     }
 
     if (isNull(employee.getEmployeeSalary())) {
       log.error("Missing required param salary.");
-      throw new RqException(ErrorCodes.PARAM_IS_MISSING, "salary");
+      throw new RqException(ErrorCodes.PARAM_IS_MISSING, "employee_salary");
     }
   }
 }

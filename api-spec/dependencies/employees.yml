@@ -19,7 +19,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/employees_details_response"
 
-  /api/v1/employee/{id}:
+  /api/v1/employees/{id}:
     get:
       summary: Get employee by id
       operationId: getEmployeeById
@@ -53,8 +53,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/employee_details"
-
+                $ref: "#/components/schemas/employee_details_response"
 
 
   /api/v1/delete/{id}:
@@ -85,7 +84,6 @@ components:
       description: Id
 
   schemas:
-
     employee_details_response:
       type: object
       properties:

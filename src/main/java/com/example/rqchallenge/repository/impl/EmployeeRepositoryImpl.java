@@ -27,7 +27,7 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
   @RetryOnServerErrors
   public EmployeeDetails createEmployee(EmployeeDetails employeeDetails) {
     log.debug("Creating employee.");
-    return employeesApi.createEmployee(employeeDetails);
+    return employeesApi.createEmployee(employeeDetails).getData();
   }
 
   @Override

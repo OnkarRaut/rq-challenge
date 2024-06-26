@@ -6,6 +6,7 @@ import com.example.rqchallenge.service.impl.EmployeeServiceImpl;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 
@@ -53,7 +54,7 @@ public class EmployeeApiDelegateImpl implements EmployeesApiDelegate {
   @Override
   public ResponseEntity<Long> getHighestSalaryOfEmployees() {
     Long highestSalary = employeeService.getHighestSalaryOfEmployees();
-    return ResponseEntity.ok(highestSalary);
+    return new ResponseEntity<Long>(highestSalary, HttpStatus.OK);
   }
 
   @Override

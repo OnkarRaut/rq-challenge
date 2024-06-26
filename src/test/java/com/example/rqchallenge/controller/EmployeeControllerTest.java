@@ -123,8 +123,12 @@ public class EmployeeControllerTest {
 
   @Test
   void testCreateEmployee() {
+    EmployeeDetailsResponse employeeDetailsResponse = new EmployeeDetailsResponse();
     EmployeeDetails returnedDetails = EmployeeServiceTest.getRandomEmployeeDetail();
-    when(employeesApi.createEmployee(any(EmployeeDetails.class))).thenReturn(returnedDetails);
+    employeeDetailsResponse.setData(returnedDetails);
+
+    when(employeesApi.createEmployee(any(EmployeeDetails.class)))
+        .thenReturn(employeeDetailsResponse);
 
     Employee employee = new Employee();
     employee.setEmployeeName(UUID.randomUUID().toString());
@@ -163,7 +167,7 @@ public class EmployeeControllerTest {
             "http://localhost:" + port + "/api/employees", employee, ApiErrorResponse.class);
 
     assertEquals(HttpStatus.BAD_REQUEST.name(), response.getErrorCode());
-    assertEquals("Param 'name' is missing.", response.getMessage());
+    assertEquals("Param 'employee_name' is missing.", response.getMessage());
 
     employee.setEmployeeName(UUID.randomUUID().toString());
     ApiErrorResponse response1 =
@@ -171,7 +175,7 @@ public class EmployeeControllerTest {
             "http://localhost:" + port + "/api/employees", employee, ApiErrorResponse.class);
 
     assertEquals(HttpStatus.BAD_REQUEST.name(), response1.getErrorCode());
-    assertEquals("Param 'age' is missing.", response1.getMessage());
+    assertEquals("Param 'employee_age' is missing.", response1.getMessage());
 
     employee.setEmployeeAge(25);
     ApiErrorResponse response2 =
@@ -179,7 +183,7 @@ public class EmployeeControllerTest {
             "http://localhost:" + port + "/api/employees", employee, ApiErrorResponse.class);
 
     assertEquals(HttpStatus.BAD_REQUEST.name(), response2.getErrorCode());
-    assertEquals("Param 'salary' is missing.", response2.getMessage());
+    assertEquals("Param 'employee_salary' is missing.", response2.getMessage());
   }
 
   @Test
