@@ -16,7 +16,7 @@ import org.springframework.web.client.RestTemplate;
 @Configuration
 public class ClientConfig {
 
-  @Value("${employees_service.base_path:https://dummy.restapiexample.com}")
+  @Value("${EMPLOYEE_SERVICE_BASE_PATH:https://dummy.restapiexample.com}")
   private String employeesServiceBasePath;
 
   @Value("#{new Integer('${employees_service.read_timeout:60000}')}")
