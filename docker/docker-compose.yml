@@ -1,0 +1,19 @@
+
+services:
+  rq-challenege:
+    build:
+      dockerfile: ./docker/Dockerfile
+      context: ../
+    container_name: rq-challenege
+    environment:
+      - EMPLOYEE_SERVICE_BASE_PATH=http://employee-service:5000
+    ports:
+      - "8080:8080"
+
+  employee-service:
+    build:
+      dockerfile: Dockerfile
+      context: ./mock-server
+    container_name: employee-service
+    ports:
+      - "5000:5000"
